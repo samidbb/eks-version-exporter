@@ -21,3 +21,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- define "eks-version-exporter.selectorLabels" -}}
 app: {{ include "eks-version-exporter.name" . }}
 {{- end -}}
+
+{{- define "eks-version-exporter.namespace" -}}
+{{- default .Release.Namespace .Values.namespaceOverride -}}
+{{- end -}}

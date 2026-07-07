@@ -7,6 +7,7 @@ image:
 
 nameOverride: ""
 fullnameOverride: ""
+namespaceOverride: ""
 
 serviceMonitor:
   enabled: true
