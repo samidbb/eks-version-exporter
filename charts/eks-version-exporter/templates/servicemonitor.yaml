@@ -1,0 +1,20 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "eks-version-exporter.fullname" . }}
+  labels:
+    {{- include "eks-version-exporter.labels" . | nindent 4 }}
+    {{- include "eks-version-exporter.selectorLabels" . | nindent 4 }}
+    release: {{ .Values.serviceMonitor.releaseLabel }}
+spec:
+  endpoints:
+    - path: {{ .Values.serviceMonitor.path }}
+      port: metrics
+      interval: {{ .Values.serviceMonitor.interval }}
+      metricRelabelings:
+        {{- toYaml .Values.serviceMonitor.metricRelabelings | nindent 8 }}
+  selector:
+    matchLabels:
+      {{- include "eks-version-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}

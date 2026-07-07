@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "eks-version-exporter.fullname" . }}
+  labels:
+    {{- include "eks-version-exporter.labels" . | nindent 4 }}
+    {{- include "eks-version-exporter.selectorLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "eks-version-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "eks-version-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "eks-version-exporter.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: metrics
+              containerPort: 8080

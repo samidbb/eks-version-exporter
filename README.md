@@ -1,6 +1,29 @@
 # eks-version-exporter
 Simple Prometheus exporter that helps keep EKS version up to date
 
+## Helm chart
+
+A Helm chart is available at [charts/eks-version-exporter](charts/eks-version-exporter).
+
+Install from the repository root:
+
+```sh
+helm install eks-version-exporter ./charts/eks-version-exporter
+```
+
+Render manifests locally:
+
+```sh
+helm template eks-version-exporter ./charts/eks-version-exporter
+```
+
+Disable `ServiceMonitor` if Prometheus Operator CRDs are not installed:
+
+```sh
+helm install eks-version-exporter ./charts/eks-version-exporter \
+	--set serviceMonitor.enabled=false
+```
+
 ## Build and push image
 
 This repository includes a [Makefile](Makefile) for building and pushing the Docker image.

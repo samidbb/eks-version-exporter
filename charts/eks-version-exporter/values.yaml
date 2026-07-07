@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: samdidfds/eks-version-exporter
+  tag: go
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceMonitor:
+  enabled: true
+  releaseLabel: prometheus
+  interval: 3600s
+  path: /metrics
+  metricRelabelings:
+    - action: keep
+      sourceLabels: [__name__]
+      regex: "eks_version_exporter|eks_version_exporter_is_outdated|eks_version_exporter_is_past_eol"
