@@ -3,6 +3,16 @@ entries:
   eks-version-exporter:
   - apiVersion: v2
     appVersion: latest
+    created: "2026-07-07T18:43:25.296725363Z"
+    description: Helm chart for eks-version-exporter
+    digest: 130e33e8bdc158b794a4ad0bfbd704ea10c6437711d0e877665e26ce41842d6a
+    name: eks-version-exporter
+    type: application
+    urls:
+    - https://github.com/samidbb/eks-version-exporter/releases/download/eks-version-exporter-0.1.1/eks-version-exporter-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2026-07-07T13:30:24.116684629Z"
     description: Helm chart for eks-version-exporter
     digest: 3b5035107f535cef2772d325e35326c9a16e393dbb4fe845caaf27e1bc22c222
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/samidbb/eks-version-exporter/releases/download/eks-version-exporter-0.1.0/eks-version-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-07-07T13:30:24.116693582Z"
+generated: "2026-07-07T18:43:25.296742331Z"
