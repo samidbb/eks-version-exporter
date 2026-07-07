@@ -7,16 +7,26 @@ RUN go mod download
 COPY src/*.go ./
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags='-s -w' -o /out/eks-version-exporter .
 
+FROM debian:bookworm-slim AS kubectl
+ARG KUBECTL_VERSION=stable
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN set -eux; \
+    if [ "$KUBECTL_VERSION" = "stable" ]; then \
+      KUBECTL_VERSION="$(curl -fsSL https://dl.k8s.io/release/stable.txt)"; \
+    fi; \
+    curl -fsSLo /kubectl "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"; \
+    chmod +x /kubectl
+
 FROM debian:bookworm-slim
 ARG APP=/usr/src/app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates tzdata curl \
+    && apt-get install -y --no-install-recommends ca-certificates tzdata \
     && rm -rf /var/lib/apt/lists/*
-
-RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
-    && chmod +x ./kubectl \
-    && mv ./kubectl /usr/local/bin/kubectl
 
 ENV TZ=Etc/UTC
 ENV APP_USER=test
@@ -26,9 +36,8 @@ RUN groupadd "$APP_USER" \
     && mkdir -p "$APP"
 
 WORKDIR $APP
-COPY --from=builder /out/eks-version-exporter ./eks-version-exporter
-
-RUN chown -R "$APP_USER:$APP_USER" "$APP"
+COPY --from=kubectl /kubectl /usr/local/bin/kubectl
+COPY --chown=$APP_USER:$APP_USER --from=builder /out/eks-version-exporter ./eks-version-exporter
 
 USER $APP_USER
 
