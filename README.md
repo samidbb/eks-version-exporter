@@ -75,6 +75,7 @@ make build-and-push
 Important:
 - `make push` and `make build-and-push` require `TAG` to be a semantic version (for example: `1.2.3`, `v1.2.3`, `1.2.3-rc.1`).
 - `TAG=latest` is rejected for push targets.
+- On push targets, `charts/eks-version-exporter/Chart.yaml` `version` is automatically patch-bumped.
 - On push targets, `charts/eks-version-exporter/Chart.yaml` `appVersion` is automatically updated to match `TAG`.
 
 Override tag and platform when needed:
