@@ -9,12 +9,16 @@ namespaceOverride: ""
 
 serviceMonitor:
   enabled: true
+
+  # -- default release label is prometheus. Change this if you are using a different release name for your Prometheus Operator installation.
   releaseLabel: prometheus
+
+  # -- default interval is 3600s
   interval: 3600s
 
-  # -- default path is /metrics, but you can override it if you have a different path
+  # -- default path is /metrics
   path: /metrics
-  # -- default metric relabelings, but you can override it if you have a different set of metrics
+  # -- default metric relabelings
   metricRelabelings:
     - action: keep
       sourceLabels:

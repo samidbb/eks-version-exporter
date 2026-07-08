@@ -1,9 +1,18 @@
 {{ template "chart.header" . }}
 
+{{ template "chart.versionBadge" . }} {{ template "chart.appVersionBadge" . }}
+
+{{ define "chart.valuesTable" }}
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+{{ range .Values }}| {{ .Key }} | {{ .Type }} | {{ .Default | replace "|" "\\|" | default .AutoDefault }} | {{ .Description | replace "|" "\\|" | default .AutoDescription }} |
+{{ end }}
+{{ end }}
+
+
 ## Source Code
 
 Project repository: https://github.com/samidbb/eks-version-exporter
 
 ## Values
-
 {{ template "chart.valuesTable" . }}
