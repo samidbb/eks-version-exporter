@@ -92,3 +92,17 @@ Render chart locally:
 ```sh
 helm template ./charts/eks-version-exporter
 ```
+
+Generate Helm chart documentation (writes `charts/*/README.md`):
+
+```sh
+make helm-docs
+```
+
+Pre-commit integration:
+
+```sh
+pre-commit install
+```
+
+After installation, the `helm-docs` hook runs on each commit and refreshes chart documentation under `charts/`.

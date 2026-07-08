@@ -2,8 +2,9 @@ IMAGE ?= samdidfds/eks-version-exporter
 TAG ?= latest
 PLATFORM ?= linux/amd64
 CHART_FILE ?= charts/eks-version-exporter/Chart.yaml
+CHARTS_ROOT ?= charts
 
-.PHONY: build push build-and-push bump-chart-version update-chart-app-version guard-tag
+.PHONY: build push build-and-push bump-chart-version update-chart-app-version guard-tag helm-docs
 
 build:
 	docker build --platform $(PLATFORM) -t $(IMAGE):$(TAG) .
@@ -30,3 +31,6 @@ update-chart-app-version:
 	mv $(CHART_FILE).tmp $(CHART_FILE)
 
 build-and-push: build push
+
+helm-docs:
+	helm-docs --chart-search-root $(CHARTS_ROOT)
