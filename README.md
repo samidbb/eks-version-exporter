@@ -10,13 +10,13 @@ Install from GitHub Pages:
 ```sh
 helm repo add eks-version-exporter https://samidbb.github.io/eks-version-exporter
 helm repo update
-helm install eks-version-exporter eks-version-exporter/eks-version-exporter
+helm upgrade --install eks-version-exporter eks-version-exporter/eks-version-exporter
 ```
 
 Install into a specific namespace:
 
 ```sh
-helm install eks-version-exporter eks-version-exporter/eks-version-exporter \
+helm upgrade --install eks-version-exporter eks-version-exporter/eks-version-exporter \
   --namespace monitoring \
   --create-namespace
 ```

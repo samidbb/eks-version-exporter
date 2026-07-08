@@ -7,7 +7,7 @@ metadata:
     {{- include "eks-version-exporter.labels" . | nindent 4 }}
     {{- include "eks-version-exporter.selectorLabels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "eks-version-exporter.selectorLabels" . | nindent 6 }}
