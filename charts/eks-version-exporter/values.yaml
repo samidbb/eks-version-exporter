@@ -16,5 +16,6 @@ serviceMonitor:
   path: /metrics
   metricRelabelings:
     - action: keep
-      sourceLabels: [__name__]
-      regex: "eks_version_exporter|eks_version_exporter_is_outdated|eks_version_exporter_is_past_eol"
+      sourceLabels:
+        - __name__
+      regex: eks_version_exporter|eks_version_exporter_is_outdated|eks_version_exporter_is_past_eol
