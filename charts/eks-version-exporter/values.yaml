@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: samdidfds/eks-version-exporter
-  tag: go
+  tag: null
   pullPolicy: IfNotPresent
 
 nameOverride: ""

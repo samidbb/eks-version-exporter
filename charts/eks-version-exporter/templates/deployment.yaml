@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: {{ include "eks-version-exporter.name" . }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ .Values.image.repository }}{{ include "eks-version-exporter.imageId" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: metrics

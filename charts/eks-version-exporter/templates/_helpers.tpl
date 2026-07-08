@@ -25,3 +25,14 @@ app: {{ include "eks-version-exporter.name" . }}
 {{- define "eks-version-exporter.namespace" -}}
 {{- default .Release.Namespace .Values.namespaceOverride -}}
 {{- end -}}
+
+{{/*
+Calculate name of image ID to use for "eks-version-exporter".
+*/}}
+{{- define "eks-version-exporter.imageId" -}}
+{{- if .Values.image.tag }}
+{{- printf ":%s" .Values.image.tag }}
+{{- else }}
+{{- printf ":%s" .Chart.AppVersion }}
+{{- end }}
+{{- end }}
