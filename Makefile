@@ -4,7 +4,7 @@ PLATFORM ?= linux/amd64
 CHART_FILE ?= charts/eks-version-exporter/Chart.yaml
 CHARTS_ROOT ?= charts
 
-.PHONY: build push build-and-push bump-chart-version update-chart-app-version guard-tag helm-docs
+.PHONY: build push build-and-push bump-chart-version update-chart-app-version guard-tag helm-docs pre-commit-install
 
 build:
 	docker build --platform $(PLATFORM) -t $(IMAGE):$(TAG) .
@@ -34,3 +34,6 @@ build-and-push: build push
 
 helm-docs:
 	helm-docs --chart-search-root $(CHARTS_ROOT)
+
+pre-commit-install:
+	pre-commit install

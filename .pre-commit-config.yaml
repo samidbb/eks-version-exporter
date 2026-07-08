@@ -1,9 +1,4 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
-    hooks:
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
   - repo: https://github.com/norwoodj/helm-docs
     rev: v1.14.2
     hooks:
@@ -11,3 +6,8 @@ repos:
         pass_filenames: false
         args:
           - --chart-search-root=charts
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
