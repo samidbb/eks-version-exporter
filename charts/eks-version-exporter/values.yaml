@@ -14,6 +14,7 @@ serviceMonitor:
 
   # -- default path is /metrics, but you can override it if you have a different path
   path: /metrics
+  # -- default metric relabelings, but you can override it if you have a different set of metrics
   metricRelabelings:
     - action: keep
       sourceLabels:
