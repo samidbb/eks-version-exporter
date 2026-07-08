@@ -11,6 +11,8 @@ serviceMonitor:
   enabled: true
   releaseLabel: prometheus
   interval: 3600s
+
+  # -- default path is /metrics, but you can override it if you have a different path
   path: /metrics
   metricRelabelings:
     - action: keep
